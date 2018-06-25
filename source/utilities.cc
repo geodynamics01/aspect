@@ -73,6 +73,8 @@ namespace aspect
         }
     }
 
+
+
     template <int dim>
     std::vector<std::string>
     expand_dimensional_variable_names (const std::vector<std::string> &var_declarations)
@@ -121,6 +123,7 @@ namespace aspect
     }
 
 
+
     /**
     * This is an internal deal.II function stolen from dof_tools.cc
     *
@@ -156,6 +159,7 @@ namespace aspect
 
       return local_component_association;
     }
+
 
 
     template <int dim>
@@ -229,6 +233,8 @@ namespace aspect
         return ecoord;
       }
 
+
+
       template <int dim>
       std_cxx11::array<double,dim>
       cartesian_to_spherical_coordinates(const Point<dim> &position)
@@ -278,6 +284,8 @@ namespace aspect
         return ccoord;
       }
 
+
+
       template <int dim>
       std_cxx11::array<double,3>
       cartesian_to_ellipsoidal_coordinates(const Point<3> &x,
@@ -302,6 +310,8 @@ namespace aspect
         phi_theta_d[2] = R_plus_d - R_bar;
         return phi_theta_d;
       }
+
+
 
       template <int dim>
       Point<3>
@@ -341,6 +351,8 @@ namespace aspect
 
 
     }
+
+
 
     template <int dim>
     bool
@@ -442,6 +454,8 @@ namespace aspect
       return (wn != 0);
     }
 
+
+
     template <int dim>
     double
     signed_distance_to_polygon(const std::vector<Point<2> > &point_list,
@@ -534,6 +548,8 @@ namespace aspect
       return (Tensor<1,2> (point - point_on_segment)).norm();
     }
 
+
+
     template <int dim>
     std_cxx11::array<Tensor<1,dim>,dim-1>
     orthogonal_vectors (const Tensor<1,dim> &v)
@@ -622,7 +638,6 @@ namespace aspect
       // success requires the file to exist and to be readable
       return static_cast<bool>(ifile);
     }
-
 
 
     std::string
@@ -760,6 +775,8 @@ namespace aspect
         }
     }
 
+
+
 // tk does the cubic spline interpolation that can be used between different spherical layers in the mantle.
 // This interpolation is based on the script spline.h, which was downloaded from
 // http://kluge.in-chemnitz.de/opensource/spline/spline.h   //
@@ -890,6 +907,8 @@ namespace aspect
           }
       }
 
+
+
       double &band_matrix::operator () (int i, int j)
       {
         int k = j - i;       // what band is the entry
@@ -981,6 +1000,7 @@ namespace aspect
           }
         return x;
       }
+
 
 
       std::vector<double> band_matrix::r_solve(const std::vector<double> &b) const
@@ -1175,6 +1195,7 @@ namespace aspect
     } // namespace tk
 
 
+
     std::string
     expand_ASPECT_SOURCE_DIR (const std::string &location)
     {
@@ -1197,6 +1218,8 @@ namespace aspect
       const std::set<std::string> set_of_strings(strings.begin(),strings.end());
       return (set_of_strings.size() == strings.size());
     }
+
+
 
     template <int dim>
     AsciiDataLookup<dim>::AsciiDataLookup(const unsigned int components,
@@ -1268,12 +1291,16 @@ namespace aspect
       return data_component_names[column_index];
     }
 
+
+
     template <int dim>
     double
     AsciiDataLookup<dim>::get_maximum_component_value(const unsigned int component) const
     {
       return maximum_component_value[component];
     }
+
+
 
     template <int dim>
     void
@@ -1388,6 +1415,8 @@ namespace aspect
       std::vector<Table<dim,double> > data_tables(components+dim,data_table);
 
 
+
+
       // Read data lines
       do
         {
@@ -1495,6 +1524,7 @@ namespace aspect
     }
 
 
+
     template <int dim>
     double
     AsciiDataLookup<dim>::get_data(const Point<dim> &position,
@@ -1523,6 +1553,7 @@ namespace aspect
     template <int dim>
     AsciiDataBase<dim>::AsciiDataBase ()
     {}
+
 
 
     template <int dim>
@@ -1567,6 +1598,7 @@ namespace aspect
     }
 
 
+
     template <int dim>
     void
     AsciiDataBase<dim>::parse_parameters (ParameterHandler &prm,
@@ -1597,6 +1629,8 @@ namespace aspect
       lookups(),
       old_lookups()
     {}
+
+
 
     template <int dim>
     void
@@ -1673,6 +1707,7 @@ namespace aspect
     }
 
 
+
     template <int dim>
     std_cxx11::array<unsigned int,dim-1>
     AsciiDataBoundary<dim>::get_boundary_dimensions (const types::boundary_id boundary_id) const
@@ -1731,6 +1766,8 @@ namespace aspect
       return boundary_dimensions;
     }
 
+
+
     namespace
     {
       /**
@@ -1762,6 +1799,8 @@ namespace aspect
       }
 
     }
+
+
 
     template <int dim>
     std::string
@@ -1800,6 +1839,7 @@ namespace aspect
 
       return result;
     }
+
 
 
     template <int dim>
@@ -1854,6 +1894,8 @@ namespace aspect
                     "Error in set_current_time. Time_weight has to be in [0,1]"));
         }
     }
+
+
 
     template <int dim>
     void
@@ -1914,6 +1956,8 @@ namespace aspect
                         << std::endl << std::endl;
     }
 
+
+
     template <int dim>
     double
     AsciiDataBoundary<dim>::
@@ -1956,12 +2000,14 @@ namespace aspect
     }
 
 
+
     template <int dim>
     double
     AsciiDataBoundary<dim>::get_maximum_component_value (const types::boundary_id boundary_indicator, const unsigned int component) const
     {
       return lookups.find(boundary_indicator)->second->get_maximum_component_value(component);
     }
+
 
 
     template <int dim>
@@ -2007,6 +2053,7 @@ namespace aspect
     }
 
 
+
     template <int dim>
     void
     AsciiDataBoundary<dim>::parse_parameters (ParameterHandler &prm,
@@ -2034,6 +2081,7 @@ namespace aspect
     template <int dim>
     AsciiDataInitial<dim>::AsciiDataInitial ()
     {}
+
 
 
     template <int dim>
@@ -2087,6 +2135,7 @@ namespace aspect
     }
 
 
+
     template <int dim>
     AsciiDataProfile<dim>::AsciiDataProfile ()
     {}
@@ -2111,6 +2160,7 @@ namespace aspect
                                 +
                                 "> not found!"));
     }
+
 
 
     template <int dim>
@@ -2142,6 +2192,8 @@ namespace aspect
           return numbers::invalid_unsigned_int;
         }
     }
+
+
 
     template <int dim>
     std::string
@@ -2319,6 +2371,9 @@ namespace aspect
       // TODO: add special cases p = 2 and p = 3
       double averaged_parameter_derivative_part_1 = 0.0;
       T averaged_parameter_derivative_part_2 = T();
+
+
+
 
       // first look at the special cases which can be done faster
       if (p <= -1000)
@@ -2689,6 +2744,7 @@ namespace aspect
 
       return 0;
     }
+
 
 
 // Explicit instantiations
